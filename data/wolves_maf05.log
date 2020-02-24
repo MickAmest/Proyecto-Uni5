@@ -1,0 +1,31 @@
+PLINK v1.90b6.15 64-bit (21 Jan 2020)
+Options in effect:
+  --allow-extra-chr
+  --chr-set 38
+  --file ../data/wolves_maf05
+  --make-bed
+  --out ../data/wolves_maf05
+
+Hostname: node07
+Working directory: /home/cirio/miguelamaro/BioinfinvRepro/Unidad5/Proyecto-Uni5/bin
+Start time: Mon Feb 24 13:51:28 2020
+
+Random number seed: 1582573888
+32011 MB RAM detected; reserving 16005 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (13092 variants, 107 samples).
+--file: ../data/wolves_maf05-temporary.bed + ../data/wolves_maf05-temporary.bim
++ ../data/wolves_maf05-temporary.fam written.
+13092 variants loaded from .bim file.
+107 samples (0 males, 0 females, 107 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to ../data/wolves_maf05.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 107 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.993061.
+13092 variants and 107 samples pass filters and QC.
+Note: No phenotypes present.
+--make-bed to ../data/wolves_maf05.bed + ../data/wolves_maf05.bim +
+../data/wolves_maf05.fam ... done.
+
+End time: Mon Feb 24 13:51:28 2020
