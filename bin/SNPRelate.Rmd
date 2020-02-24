@@ -1,0 +1,68 @@
+### Perform PCA on wolves data
+### Miguel Amaro, Feb 2020
+
+## Load libraries
+```{r}
+library(SNPRelate)
+library(ape)
+library(ggplot2)
+```
+
+
+### Load data
+```{r}
+### Create gds file from plink files. This gds file will be used with SNPrelate.
+snpgdsBED2GDS("../data/wolves_maf05.bed", 
+              "../data/wolves_maf05.fam", 
+              "../data/wolves_maf05.bim", 
+              out.gdsfn="../data/wolves_maf_05.gds", 
+              option = snpgdsOption(Z=38)) # 38 chromosomes
+
+# See summary
+snpgdsSummary("../data/wolves_maf_05.gds")
+
+# Load gds file
+genofile <- snpgdsOpen("../data/wolves_maf_05.gds")
+
+# Check snp.ids
+head(read.gdsn(index.gdsn(genofile, "snp.id")))
+
+# Check sample.ids
+head(read.gdsn(index.gdsn(genofile, "sample.id")))
+
+# Get sample names from gdsn 
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+sample.id
+
+```
+
+
+### Realizar PCA 
+
+```{r}
+# PCA
+pca <- snpgdsPCA(genofile, num.thread=2)
+
+# Calculate % of variation explained by the two first components
+pc.percent <- pca$varprop*100
+head(round(pc.percent, 2))
+
+x<-round(pc.percent, 2)
+sum(x[1:4])
+sum(x[1:10])
+sum(x[1:30])
+
+
+# Output results on a dataframe
+tab <- data.frame(sample.id = pca$sample.id,
+    EV1 = pca$eigenvect[,1],    # the first eigenvector
+    EV2 = pca$eigenvect[,2],    # the second eigenvector
+    stringsAsFactors = FALSE)
+head(tab)
+
+# Plot PCA
+ggplot(data = tab, aes(x=EV2, y=EV1)) + geom_point() +
+  ylab(paste0("eigenvector 1 explaining ", round(pc.percent, 2)[1], "%")) +
+  xlab(paste0("eigenvector 2 explaining ", round(pc.percent, 2)[2], "%"))
+
+```
