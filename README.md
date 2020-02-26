@@ -9,7 +9,7 @@ The order in which the scripts should be run is as follows:
 The `get_data.sh` script creates the data directory and downloads to it the genetic data in vcf format from the Dryad repository.
 
 ### Running VCFtools to perform the analyses.
-The `run_vcftools.sh` script runs VCFtools to perform the following analyses:
+The `run_vcftools.sh` script runs VCFtools to perform the following analyses on the wolves.vcf file:
   * Count the total number of individuals and SNPs in the file
   * Estimate allele frequencies of every allele in all individuals and saves the result to a file in the data directory.
   * Count the number of sites with no missing data.
