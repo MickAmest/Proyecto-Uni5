@@ -13,17 +13,17 @@ library(ggplot2)
 ### Load data
 ```{r}
 ### Create gds file from plink files. This gds file will be used with SNPrelate.
-snpgdsBED2GDS("../data/wolves_maf05.bed", 
-              "../data/wolves_maf05.fam", 
-              "../data/wolves_maf05.bim", 
-              out.gdsfn="../data/wolves_maf_05.gds", 
+snpgdsBED2GDS("../data/plink/wolves_maf05.bed", 
+              "../data/plink/wolves_maf05.fam", 
+              "../data/plink/wolves_maf05.bim", 
+              out.gdsfn="../data/plink/wolves_maf_05.gds", 
               option = snpgdsOption(Z=38)) # 38 chromosomes
 
 # See summary
-snpgdsSummary("../data/wolves_maf_05.gds")
+snpgdsSummary("../data/plink/wolves_maf_05.gds")
 
 # Load gds file
-genofile <- snpgdsOpen("../data/wolves_maf_05.gds")
+genofile <- snpgdsOpen("../data/plink/wolves_maf_05.gds")
 
 # Check snp.ids
 head(read.gdsn(index.gdsn(genofile, "snp.id")))
@@ -74,10 +74,10 @@ library(tidyr)
 library(ggplot2)
 
 # Load data
-freqs <- read.delim(file = "../data/frecs_nomiss.frq", row.names = NULL)
+freqs <- read.delim(file = "../data/VCFtools/frecs_nomiss.frq", row.names = NULL)
 # Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the frequency values)
 freqs_clean <- freqs %>% separate("X.ALLELE.FREQ.", c("Allele", "Freq"), sep = ":")
-write.table(freqs_clean, row.names = FALSE, file = "../data/freqs_clean")
+write.table(freqs_clean, row.names = FALSE, file = "../data/VCFtools/freqs_clean")
 
 # Plot allele frequencies for all sites (SFS)
 ggplot(freqs_clean, aes(as.numeric(freqs_clean$Freq))) + # Read data as numeric, since they are in a DF, they are read as character by default

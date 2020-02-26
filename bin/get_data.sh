@@ -3,6 +3,7 @@
 
 cd ../
 mkdir data
-cd data
+mkdir VCFtools
+cd data/VCFtools
 wget https://datadryad.org/stash/downloads/file_stream/6226
-mv 6226 wolves.vcf 
+mv 6226 wolves.vcf
