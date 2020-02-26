@@ -384,37 +384,37 @@ library(ggplot2)</code></pre>
 <div id="load-data" class="section level3">
 <h3>Load data</h3>
 <pre class="r"><code>### Create gds file from plink files. This gds file will be used with SNPrelate.
-snpgdsBED2GDS(&quot;../data/wolves_maf05.bed&quot;, 
-              &quot;../data/wolves_maf05.fam&quot;, 
-              &quot;../data/wolves_maf05.bim&quot;, 
-              out.gdsfn=&quot;../data/wolves_maf_05.gds&quot;, 
+snpgdsBED2GDS(&quot;../data/plink/wolves_maf05.bed&quot;, 
+              &quot;../data/plink/wolves_maf05.fam&quot;, 
+              &quot;../data/plink/wolves_maf05.bim&quot;, 
+              out.gdsfn=&quot;../data/plink/wolves_maf_05.gds&quot;, 
               option = snpgdsOption(Z=38)) # 38 chromosomes</code></pre>
 <pre><code>## Start file conversion from PLINK BED to SNP GDS ...
-##     BED file: '../data/wolves_maf05.bed'
+##     BED file: '../data/plink/wolves_maf05.bed'
 ##         SNP-major mode (Sample X SNP), 345.2K
-##     FAM file: '../data/wolves_maf05.fam'
-##     BIM file: '../data/wolves_maf05.bim'
-## Wed Feb 26 10:36:31 2020     (store sample id, snp id, position, and chromosome)
+##     FAM file: '../data/plink/wolves_maf05.fam'
+##     BIM file: '../data/plink/wolves_maf05.bim'
+## Wed Feb 26 12:13:30 2020     (store sample id, snp id, position, and chromosome)
 ##     start writing: 107 samples, 13092 SNPs ...
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Feb 26 10:36:31 2020     Done.
+## Wed Feb 26 12:13:30 2020     Done.
 ## Optimize the access efficiency ...
 ## Clean up the fragments of GDS file:
-##     open the file '../data/wolves_maf_05.gds' (398.9K)
+##     open the file '../data/plink/wolves_maf_05.gds' (398.9K)
 ##     # of fragments: 39
-##     save to '../data/wolves_maf_05.gds.tmp'
-##     rename '../data/wolves_maf_05.gds.tmp' (398.7K, reduced: 252B)
+##     save to '../data/plink/wolves_maf_05.gds.tmp'
+##     rename '../data/plink/wolves_maf_05.gds.tmp' (398.7K, reduced: 252B)
 ##     # of fragments: 18</code></pre>
 <pre class="r"><code># See summary
-snpgdsSummary(&quot;../data/wolves_maf_05.gds&quot;)</code></pre>
-<pre><code>## The file name: /media/ubuntu/DATA/aejmi/BioinfinvRepro/Unidad5/Proyecto-Uni5/data/wolves_maf_05.gds 
+snpgdsSummary(&quot;../data/plink/wolves_maf_05.gds&quot;)</code></pre>
+<pre><code>## The file name: /media/ubuntu/DATA/aejmi/BioinfinvRepro/Unidad5/Proyecto-Uni5/data/plink/wolves_maf_05.gds 
 ## The total number of samples: 107 
 ## The total number of SNPs: 13092 
 ## SNP genotypes are stored in SNP-major mode (Sample X SNP).</code></pre>
 <pre class="r"><code># Load gds file
-genofile &lt;- snpgdsOpen(&quot;../data/wolves_maf_05.gds&quot;)
+genofile &lt;- snpgdsOpen(&quot;../data/plink/wolves_maf_05.gds&quot;)
 
 # Check snp.ids
 head(read.gdsn(index.gdsn(genofile, &quot;snp.id&quot;)))</code></pre>
@@ -456,12 +456,12 @@ pca &lt;- snpgdsPCA(genofile, num.thread=2)</code></pre>
 ##     using 2 (CPU) cores
 ## PCA:    the sum of all selected genotypes (0,1,2) = 278232
 ## CPU capabilities: Double-Precision SSE2
-## Wed Feb 26 10:36:32 2020    (internal increment: 4208)
+## Wed Feb 26 12:13:30 2020    (internal increment: 4208)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Feb 26 10:36:32 2020    Begin (eigenvalues and eigenvectors)
-## Wed Feb 26 10:36:32 2020    Done.</code></pre>
+## Wed Feb 26 12:13:30 2020    Begin (eigenvalues and eigenvectors)
+## Wed Feb 26 12:13:30 2020    Done.</code></pre>
 <pre class="r"><code># Calculate % of variation explained by the two first components
 pc.percent &lt;- pca$varprop*100
 head(round(pc.percent, 2))</code></pre>
@@ -499,10 +499,10 @@ ggplot(data = tab, aes(x=EV2, y=EV1)) + geom_point() +
 library(ggplot2)
 
 # Load data
-freqs &lt;- read.delim(file = &quot;../data/frecs_nomiss.frq&quot;, row.names = NULL)
+freqs &lt;- read.delim(file = &quot;../data/VCFtools/frecs_nomiss.frq&quot;, row.names = NULL)
 # Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the frequency values)
 freqs_clean &lt;- freqs %&gt;% separate(&quot;X.ALLELE.FREQ.&quot;, c(&quot;Allele&quot;, &quot;Freq&quot;), sep = &quot;:&quot;)
-write.table(freqs_clean, row.names = FALSE, file = &quot;../data/freqs_clean&quot;)
+write.table(freqs_clean, row.names = FALSE, file = &quot;../data/VCFtools/freqs_clean&quot;)
 
 # Plot allele frequencies for all sites (SFS)
 ggplot(freqs_clean, aes(as.numeric(freqs_clean$Freq))) + # Read data as numeric, since they are in a DF, they are read as character by default
