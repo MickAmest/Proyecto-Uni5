@@ -394,12 +394,12 @@ snpgdsBED2GDS(&quot;../data/wolves_maf05.bed&quot;,
 ##         SNP-major mode (Sample X SNP), 345.2K
 ##     FAM file: '../data/wolves_maf05.fam'
 ##     BIM file: '../data/wolves_maf05.bim'
-## Tue Feb 25 17:27:16 2020     (store sample id, snp id, position, and chromosome)
+## Tue Feb 25 18:26:52 2020     (store sample id, snp id, position, and chromosome)
 ##     start writing: 107 samples, 13092 SNPs ...
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Tue Feb 25 17:27:16 2020     Done.
+## Tue Feb 25 18:26:52 2020     Done.
 ## Optimize the access efficiency ...
 ## Clean up the fragments of GDS file:
 ##     open the file '../data/wolves_maf_05.gds' (398.9K)
@@ -456,12 +456,12 @@ pca &lt;- snpgdsPCA(genofile, num.thread=2)</code></pre>
 ##     using 2 (CPU) cores
 ## PCA:    the sum of all selected genotypes (0,1,2) = 278232
 ## CPU capabilities: Double-Precision SSE2
-## Tue Feb 25 17:27:16 2020    (internal increment: 4208)
+## Tue Feb 25 18:26:52 2020    (internal increment: 4208)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Tue Feb 25 17:27:16 2020    Begin (eigenvalues and eigenvectors)
-## Tue Feb 25 17:27:16 2020    Done.</code></pre>
+## Tue Feb 25 18:26:52 2020    Begin (eigenvalues and eigenvectors)
+## Tue Feb 25 18:26:52 2020    Done.</code></pre>
 <pre class="r"><code># Calculate % of variation explained by the two first components
 pc.percent &lt;- pca$varprop*100
 head(round(pc.percent, 2))</code></pre>
@@ -500,7 +500,7 @@ library(ggplot2)
 
 # Load data
 freqs &lt;- read.delim(file = &quot;../data/freq_wolves.out.frq&quot;, row.names = NULL)
-# Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the # frequency values)
+# Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the frequency values)
 freqs_clean &lt;- freqs %&gt;% separate(&quot;X.ALLELE.FREQ.&quot;, c(&quot;Allele&quot;, &quot;Freq&quot;), sep = &quot;:&quot;)
 write.table(freqs_clean, row.names = FALSE, file = &quot;../data/freqs_clean&quot;)
 

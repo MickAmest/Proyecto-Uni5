@@ -75,7 +75,7 @@ library(ggplot2)
 
 # Load data
 freqs <- read.delim(file = "../data/freq_wolves.out.frq", row.names = NULL)
-# Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the # frequency values)
+# Separate X.ALLELE.FREQ. column into two separate columns (so we can plot the frequency values)
 freqs_clean <- freqs %>% separate("X.ALLELE.FREQ.", c("Allele", "Freq"), sep = ":")
 write.table(freqs_clean, row.names = FALSE, file = "../data/freqs_clean")
 
